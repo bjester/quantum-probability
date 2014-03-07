@@ -1,3 +1,6 @@
 [submodule "vendor/mathjs"]
 	path = vendor/mathjs
 	url = https://github.com/josdejong/mathjs.git
+[submodule "vendor/dat-gui"]
+	path = vendor/dat-gui
+	url = https://code.google.com/p/dat-gui/
