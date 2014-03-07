@@ -1,0 +1,43 @@
+{
+  "name": "quantum-probability",
+  "title": "Quantum Probability",
+  "description": "Simulation of inherent quantum probability",
+  "version": "0.1.0",
+  "main": "build/quantum.js",
+  "homepage": "http://github.com/bjester/quantum-probability",
+  "author": {
+    "name": "Blaine Jester",
+    "url": "http://blainejester.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bjester/quantum-probability.git"
+  },
+  "keywords": [
+    "quantum",
+    "probability",
+    "javascript",
+    "physics"
+  ],
+  "dependencies": {
+    "mathjs": "0.18.1",
+    "dat-gui": "0.5",
+    "stats": "r11"
+  },
+  "devDependencies": {
+    "archiver": "0.5.2",
+    "gzip-js": "0.3.2",
+    "testswarm": "1.1.0",
+    "load-grunt-tasks": "0.3.0",
+    "requirejs": "2.1.10",
+    "shelljs": "0.2.6",
+    "grunt": "0.4.2",
+    "grunt-cli": "0.1.13",
+    "grunt-contrib-jshint": "0.8.0",
+    "grunt-contrib-nodeunit": "0.2.0",
+    "grunt-contrib-uglify": "0.3.2",
+    "grunt-compare-size": "0.4.0",
+    "grunt-jscs-checker": "0.3.2",
+    "grunt-jsonlint": "1.0.4"
+  }
+}

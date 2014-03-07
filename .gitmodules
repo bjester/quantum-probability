@@ -4,3 +4,6 @@
 [submodule "vendor/dat-gui"]
 	path = vendor/dat-gui
 	url = https://code.google.com/p/dat-gui/
+[submodule "vendor/stats"]
+	path = vendor/stats
+	url = https://github.com/mrdoob/stats.js.git
