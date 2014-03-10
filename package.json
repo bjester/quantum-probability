@@ -22,7 +22,7 @@
   "dependencies": {
     "mathjs": "0.18.1",
     "dat-gui": "0.5",
-    "stats": "r11"
+    "stats": "1.0.0"
   },
   "devDependencies": {
     "archiver": "0.5.2",
