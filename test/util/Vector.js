@@ -1,19 +1,6 @@
 var assert = require("assert"),
-    mathjs = require('mathjs');
-
-// Export mathjs, since its dependency
-global.mathjs = mathjs;
-require('../../build/quantum-probability.min.js');
-
-// Create instance
-var math = mathjs(),
-    Util = global.Util;
-
-function withinRange(expected, actual, range)
-{
-  return (math.abs(actual) + range) > expected
-    && (math.abs(actual) - range) < expected;
-}
+    math = require('mathjs')(),
+    test = require('../bootstrap.js');
 
 describe('Vector', function()
 {
@@ -24,11 +11,11 @@ describe('Vector', function()
     it('should make magnitude ~1', function()
     {
       // Not normalized yet
-      assert.equal(true, withinRange(math.SQRT2, v.getMagnitude(), 5e-15));
+      assert.equal(true, test.withinRange(math.SQRT2, v.getMagnitude(), 5e-15));
       
       // Normalize and check
       v.normalize();
-      assert.equal(true, withinRange(1, v.getMagnitude(), 5e-15));
+      assert.equal(true, test.withinRange(1, v.getMagnitude(), 5e-15));
     });
   });
 });

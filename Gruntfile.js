@@ -35,12 +35,15 @@ module.exports = function(grunt)
     pkg: grunt.file.readJSON('package.json'),
     uglify: 
     {
-      options: 
-      {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-      },
       build: 
       {
+        options: 
+        {
+          banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+          mangle: false,
+          compress: false,
+          beautify: true
+        },
         src: 
         [
           // Base
@@ -64,7 +67,19 @@ module.exports = function(grunt)
           'lib/State.js',
           'lib/System.js'
         ],
-        dest: 'build/<%= pkg.name %>.min.js'
+        dest: 'build/<%= pkg.name %>.js'
+      },
+      
+      minify:
+      {
+        options: 
+        {
+          banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+        },
+        files:
+        {
+          'build/<%= pkg.name %>.min.js': 'build/<%= pkg.name %>.js'
+        }
       }
     },
     
@@ -191,15 +206,16 @@ module.exports = function(grunt)
   grunt.loadNpmTasks('grunt-shell');
 
   // Default task(s).
-  grunt.registerTask('default', ['uglify']);
+  grunt.registerTask('default', ['uglify:build', 'uglify:minify']);
   grunt.registerTask('build', ['shell:buildDependencies']);
-  grunt.registerTask('test', 'mochaTest');
+  grunt.registerTask('test', ['uglify:build', 'mochaTest']);
   grunt.registerTask('undeploy', ['clean']);
   grunt.registerTask('deploy', 
   [
     'clean', 
     //'shell:buildDependencies', 
-    'uglify', 
+    'uglify:build', 
+    'uglify:minify', 
     'copy',
     'resourceInject'
   ]);
