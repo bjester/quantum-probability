@@ -28,7 +28,6 @@ module.exports = function(grunt)
     });
   }
   
-  
   // Project configuration.
   grunt.initConfig(
   {
@@ -112,6 +111,55 @@ module.exports = function(grunt)
     }
   });
   
+  /**
+   * @param {String} file
+   * @return {String}
+   */
+  function getScript(file)
+  {
+    return [
+      '<script type="text/javascript" src="/js/',
+      file,
+      '"></script>'
+    ].join('');
+  }
+  
+  /**
+   * @param {String} file
+   * @return {String}
+   */
+  function getLink(file)
+  {
+    return [
+      '<link type="text/css" rel="stylesheet" href="/css/',
+      file,
+      '" />'
+    ].join('');
+  }
+  
+  /**
+   * 
+   */
+  grunt.registerTask('resourceInject', function()
+  {
+    var dependsBase = depends.map(path.basename),
+        t = '\n  ';
+    
+    var scripts = fs.readdirSync(DEPLOY_JS).filter(function(file)
+    {
+      return dependsBase.indexOf(file) < 0 && path.extname(file) === '.js';
+    }).concat(dependsBase).map(getScript).reverse();
+    
+    var stylesheets = fs.readdirSync(DEPLOY_CSS).map(getLink);
+    var index = DEPLOY + '/index.html';
+    var data = fs.readFileSync(index, {encoding: 'utf8'});
+    
+    data = data.replace('</head>', t + '  ' + stylesheets.join(t + '  ') + t + '</head>')
+               .replace('</body>', t + '  ' + scripts.join(t + '  ') + t + '</body>');
+
+    fs.writeFileSync(index, data);
+  });
+  
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -125,8 +173,9 @@ module.exports = function(grunt)
   grunt.registerTask('deploy', 
   [
     'clean', 
-    'shell:buildDependencies', 
+    //'shell:buildDependencies', 
     'uglify', 
-    'copy'
+    'copy',
+    'resourceInject'
   ]);
 };
