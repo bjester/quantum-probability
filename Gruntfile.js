@@ -1,8 +1,34 @@
 // Gruntfile
-var fs = require('fs');
+var fs = require('fs'),
+    path = require('path');
+  
+var DEPLOY = 'deploy';
+var DEPLOY_JS = DEPLOY + '/js';
+var DEPLOY_CSS = DEPLOY + '/css';
 
 module.exports = function(grunt)
 {
+  var depends = 
+  [
+    'vendor/mathjs/dist/math.min.js',
+    'vendor/dat-gui/build/dat.gui.min.js',
+    'vendor/stats/build/stats.min.js'
+  ];
+  
+  var copyDepends = [];
+  
+  for (var i = 0; i < depends.length; i++)
+  {
+    copyDepends.push(
+    {
+      expand: true,
+      cwd: path.dirname(depends[i]) + '/',
+      src: [path.basename(depends[i])],
+      dest: DEPLOY_JS
+    });
+  }
+  
+  
   // Project configuration.
   grunt.initConfig(
   {
@@ -41,8 +67,22 @@ module.exports = function(grunt)
     },
     
     clean: [
-      'deploy/'
+      DEPLOY
     ],
+    
+    shell: {
+      buildDependencies: 
+      {
+        options: 
+        {
+          stdout: true
+        },
+        command: function()
+        {
+          return 'cd vendor/mathjs && npm run build && cd ../../';
+        }
+      }
+    },
     
     copy:
     {
@@ -54,16 +94,19 @@ module.exports = function(grunt)
             expand: true, 
             cwd: 'build/', 
             src: ['**'], 
-            dest: 'deploy/js/' 
-//            filter: '*.js'
+            dest: DEPLOY_JS
           }
         ]
+      },
+      dependencies:
+      {
+        files: copyDepends
       },
       src:
       {
         files: 
         [
-          {expand: true, cwd: 'src/', src: ['**'], dest: 'deploy/'}
+          {expand: true, cwd: 'src/', src: ['**'], dest: DEPLOY}
         ]
       }
     }
@@ -73,9 +116,17 @@ module.exports = function(grunt)
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-shell');
 
   // Default task(s).
   grunt.registerTask('default', ['uglify']);
+  grunt.registerTask('build', ['shell:buildDependencies']);
   grunt.registerTask('undeploy', ['clean']);
-  grunt.registerTask('deploy', ['clean', 'uglify', 'copy']);
+  grunt.registerTask('deploy', 
+  [
+    'clean', 
+    'shell:buildDependencies', 
+    'uglify', 
+    'copy'
+  ]);
 };
