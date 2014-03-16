@@ -1,9 +1,9 @@
 {
   "name": "quantum-probability",
   "title": "Quantum Probability",
-  "description": "Simulation of inherent quantum probability",
+  "description": "Simulation of Stern-Gerlach experiment, and time dependent phenomena",
   "version": "0.1.0",
-  "main": "build/quantum.js",
+  "main": "build/quantum-probability.min.js",
   "homepage": "http://github.com/bjester/quantum-probability",
   "author": {
     "name": "Blaine Jester",
@@ -16,6 +16,9 @@
   "keywords": [
     "quantum",
     "probability",
+    "stern-gerlach",
+    "spin",
+    "spin-flip",
     "javascript",
     "physics"
   ],
@@ -41,6 +44,7 @@
     "grunt-contrib-clean": "~0.5.0",
     "grunt-jscs-checker": "0.3.2",
     "grunt-jsonlint": "1.0.4",
-    "grunt-shell": "~0.6.4"
+    "grunt-shell": "~0.6.4",
+    "grunt-mocha-test": "~0.10.0"
   }
 }

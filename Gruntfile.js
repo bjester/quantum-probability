@@ -11,6 +11,7 @@ module.exports = function(grunt)
   var depends = 
   [
     'vendor/mathjs/dist/math.min.js',
+    'vendor/mathjs/dist/math.map',
     'vendor/dat-gui/build/dat.gui.min.js',
     'vendor/stats/build/stats.min.js'
   ];
@@ -50,7 +51,9 @@ module.exports = function(grunt)
           
           // Dependee's
           'lib/util/Logger.js',
+          'lib/util/Vector.js',
           'lib/exception/InvalidPreparation.js',
+          'lib/exception/InvalidProperty.js',
           'lib/particle/Electron.js',
           'lib/particle/Neutron.js',
           'lib/particle/Proton.js',
@@ -108,6 +111,19 @@ module.exports = function(grunt)
           {expand: true, cwd: 'src/', src: ['**'], dest: DEPLOY}
         ]
       }
+    },
+    
+    // Testing
+    mochaTest: 
+    {
+      test: 
+      {
+        options: 
+        {
+          reporter: 'spec'
+        },
+        src: ['test/**/*.js']
+      }
     }
   });
   
@@ -145,10 +161,17 @@ module.exports = function(grunt)
     var dependsBase = depends.map(path.basename),
         t = '\n  ';
     
-    var scripts = fs.readdirSync(DEPLOY_JS).filter(function(file)
-    {
-      return dependsBase.indexOf(file) < 0 && path.extname(file) === '.js';
-    }).concat(dependsBase).map(getScript).reverse();
+    var scripts = fs.readdirSync(DEPLOY_JS)
+      .filter(function(file)
+      {
+        return dependsBase.indexOf(file) < 0;
+      })
+      .concat(dependsBase)
+      .filter(function(file)
+      {
+        return path.extname(file) === '.js';
+      })
+      .map(getScript).reverse();
     
     var stylesheets = fs.readdirSync(DEPLOY_CSS).map(getLink);
     var index = DEPLOY + '/index.html';
@@ -164,11 +187,13 @@ module.exports = function(grunt)
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
 
   // Default task(s).
   grunt.registerTask('default', ['uglify']);
   grunt.registerTask('build', ['shell:buildDependencies']);
+  grunt.registerTask('test', 'mochaTest');
   grunt.registerTask('undeploy', ['clean']);
   grunt.registerTask('deploy', 
   [
