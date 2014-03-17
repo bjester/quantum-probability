@@ -7,4 +7,5 @@ effects on spin probability.
 
 For educational use only.
 
-Blaine Jester :: 2014 :: California State University - San Marcos
+Developed by Blaine Jester, under supervision of Dr. Charles De Leone  
+2014 :: California State University - San Marcos
