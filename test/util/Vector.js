@@ -13,14 +13,14 @@ describe('Vector', function()
   
   describe('components', function()
   {
-    it('default component values should be 1', function()
+    it('should default component values should be 1', function()
     {
       var v = getVector();
       assert.equal(1, v.getComponent(0));
       assert.equal(1, v.getComponent(1));
     });
     
-    it('updated', function()
+    it('should update components correctly', function()
     {
       var v = getVector();
       v.setComponents([3,4]);
@@ -35,7 +35,7 @@ describe('Vector', function()
     var v = getVector();
     v.setComponents([3,4]);
     
-    it('3-4-5 triangle, should be 5', function()
+    it('should produce 5 for 3-4-5 triangle', function()
     {
       // Normalize and check
       assert.equal(5, v.getMagnitude());
@@ -70,5 +70,54 @@ describe('Vector', function()
     });
   });
   
+  describe('innerProduct', function()
+  { 
+    it('should be the same as the square of the magnitude', function()
+    {
+      var v = getVector();
+      v.setComponents([3,4]);
+
+      assert.equal(v.getMagnitude() * v.getMagnitude(), 
+        Util.Vector.innerProduct(v,v));
+    });
+    
+    it('should produce an expected value', function()
+    {
+      var v1 = getVector(),
+          v2 = getVector();
+      v2.setComponents([3,4]);
+
+      assert.equal(7, Util.Vector.innerProduct(v1,v2));
+    });
+    
+    it('should produce multiply basis correctly', function()
+    {
+      var v1 = new Util.Vector([math.matrix([[1],[1]]), math.matrix([[1],[1]])]),
+          v2 = new Util.Vector([math.matrix([[1],[1]]), math.matrix([[1],[1]])]);
+      v1.setComponents([3,4]);
+      v2.setComponents([3,3]);
+
+      assert.equal(84, Util.Vector.innerProduct(v1,v2));
+    });
+    
+    it('should produce zero for perpendiclar vectors', function()
+    {
+      var v1 = getVector(),
+          v2 = getVector();
+      v1.setComponents([3,4]);
+      v2.setComponents([-4,3]);
+
+      assert.equal(0, Util.Vector.innerProduct(v1,v2));
+    });
+    
+    it('should handle complex numbers', function()
+    {
+      var v = new Util.Vector([math.matrix([[math.i],[0]]), math.matrix([[0],[math.i]])]);
+      v.setComponents([3,4]);
+
+      assert.equal(v.getMagnitude() * v.getMagnitude(), 
+        Util.Vector.innerProduct(v,v));
+    });
+  });
   
 });
