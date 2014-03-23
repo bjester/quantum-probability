@@ -15,6 +15,7 @@ module.exports = function(grunt)
   [
     // Base
     'lib/bootstrap.js',
+    'lib/Constants.js',
     'lib/Util.js',
     'lib/exception/Exception.js',
     'lib/particle/Particle.js',
