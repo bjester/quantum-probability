@@ -1,13 +1,42 @@
 // Gruntfile
 var fs = require('fs'),
     path = require('path');
-  
+    
+require('./lib/Util.js');
+var Util = global.Util;
+
 var DEPLOY = 'deploy';
 var DEPLOY_JS = DEPLOY + '/js';
 var DEPLOY_CSS = DEPLOY + '/css';
 
 module.exports = function(grunt)
 {
+  var src = 
+  [
+    // Base
+    'lib/bootstrap.js',
+    'lib/Util.js',
+    'lib/exception/Exception.js',
+    'lib/particle/Particle.js',
+    'lib/analyzer/Analyzer.js',
+
+    // Dependee's
+    'lib/util/Logger.js',
+    'lib/util/Vector.js',
+    'lib/exception/InvalidPreparation.js',
+    'lib/exception/InvalidProperty.js',
+    'lib/particle/Electron.js',
+    'lib/particle/Neutron.js',
+    'lib/particle/Proton.js',
+    'lib/analyzer/SternGerlach.js',
+    'lib/analyzer/MagneticField.js',
+
+    // Core (final)
+    'lib/Chain.js',
+    'lib/State.js',
+    'lib/System.js'
+  ];
+  
   var depends = 
   [
     'vendor/mathjs/dist/math.min.js',
@@ -44,29 +73,7 @@ module.exports = function(grunt)
           compress: false,
           beautify: true
         },
-        src: 
-        [
-          // Base
-          'lib/Util.js',
-          'lib/exception/Exception.js',
-          'lib/particle/Particle.js',
-          'lib/analyzer/Analyzer.js',
-          
-          // Dependee's
-          'lib/util/Logger.js',
-          'lib/util/Vector.js',
-          'lib/exception/InvalidPreparation.js',
-          'lib/exception/InvalidProperty.js',
-          'lib/particle/Electron.js',
-          'lib/particle/Neutron.js',
-          'lib/particle/Proton.js',
-          'lib/analyzer/SternGerlach.js',
-          'lib/analyzer/MagneticField.js',
-          
-          // Core (final)
-          'lib/State.js',
-          'lib/System.js'
-        ],
+        src: src,
         dest: 'build/<%= pkg.name %>.js'
       },
       
@@ -83,11 +90,14 @@ module.exports = function(grunt)
       }
     },
     
-    clean: [
-      DEPLOY
-    ],
+    clean: 
+    {
+      deploy: [ DEPLOY ],
+      bootstrap: ['lib/bootstrap.js']
+    },
     
-    shell: {
+    shell: 
+    {
       buildDependencies: 
       {
         options: 
@@ -169,7 +179,51 @@ module.exports = function(grunt)
   }
   
   /**
-   * 
+   * @param {String} str
+   * @return {String}
+   */
+  function ucfirst(str)
+  {
+    str += '';
+    var f = str.charAt(0).toUpperCase();
+    return f + str.substr(1);
+  }
+  
+  /**
+   * Generates bootstrap JSON
+   */
+  grunt.registerTask('bootstrapGenerate', function()
+  {
+    var output = {},
+        bootstrapSrc = src.map(function(p)
+        {
+          return p.split('/').slice(1);
+        });
+        
+    for (var i = 0; i < bootstrapSrc.length; i++)
+    {
+      var paths = bootstrapSrc[i],
+          merge = {},
+          current = merge;
+      
+      for (var j = 0; j < paths.length; j++)
+      {
+        var key = ucfirst(path.basename(paths[j], '.js'));
+        
+        current[key] = {};
+        current = current[key];
+      }
+      
+      Util.extend(output, merge, false, true);
+    }
+    
+    var bootstrap = fs.readFileSync('bootstrap.js.tmpl', {encoding: 'utf8'});
+    bootstrap = bootstrap.replace('%spaces%', JSON.stringify(output));
+    fs.writeFileSync('lib/bootstrap.js', bootstrap);
+  });
+  
+  /**
+   * Injects resources into 
    */
   grunt.registerTask('resourceInject', function()
   {
@@ -179,7 +233,7 @@ module.exports = function(grunt)
     var scripts = fs.readdirSync(DEPLOY_JS)
       .filter(function(file)
       {
-        return dependsBase.indexOf(file) < 0;
+        return dependsBase.indexOf(file) < 0 && /ma?in/.test(file);
       })
       .concat(dependsBase)
       .filter(function(file)
@@ -206,17 +260,22 @@ module.exports = function(grunt)
   grunt.loadNpmTasks('grunt-shell');
 
   // Default task(s).
-  grunt.registerTask('default', ['uglify:build', 'uglify:minify']);
+  grunt.registerTask('default', 
+    ['bootstrapGenerate', 'uglify:build', 'uglify:minify', 'clean:bootstrap']);
   grunt.registerTask('build', ['shell:buildDependencies']);
-  grunt.registerTask('test', ['uglify:build', 'mochaTest']);
+  grunt.registerTask('test', 
+    ['bootstrapGenerate', 'uglify:build', 'mochaTest', 'clean:bootstrap']);
   grunt.registerTask('undeploy', ['clean']);
+  grunt.registerTask('bootstrap', ['bootstrapGenerate']);
   grunt.registerTask('deploy', 
   [
     'clean', 
     //'shell:buildDependencies', 
+    'bootstrapGenerate',
     'uglify:build', 
     'uglify:minify', 
     'copy',
-    'resourceInject'
+    'resourceInject',
+    'clean:bootstrap'
   ]);
 };

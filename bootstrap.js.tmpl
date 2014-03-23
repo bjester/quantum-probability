@@ -1,0 +1,13 @@
+/**
+ * Bootstrap file, initializes namespaces
+ */
+(function()
+{
+  var global = this,
+      spaces = %spaces%;
+
+  for (var k in spaces)
+  {
+    global[k] = spaces[k];
+  }
+})();
