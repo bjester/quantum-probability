@@ -90,7 +90,7 @@ describe('Vector', function()
       assert.equal(7, Util.Vector.innerProduct(v1,v2));
     });
     
-    it('should produce multiply basis correctly', function()
+    it('should multiply basis correctly', function()
     {
       var v1 = new Util.Vector([math.matrix([[1],[1]]), math.matrix([[1],[1]])]),
           v2 = new Util.Vector([math.matrix([[1],[1]]), math.matrix([[1],[1]])]);
@@ -117,6 +117,22 @@ describe('Vector', function()
 
       assert.equal(v.getMagnitude() * v.getMagnitude(), 
         Util.Vector.innerProduct(v,v));
+    });
+  });
+  
+  describe('outerProduct', function()
+  { 
+    it('should compute correctly', function()
+    {
+      var v1 = new Util.Vector([math.matrix([[1],[1]]), math.matrix([[1],[1]])]),
+          v2 = new Util.Vector([math.matrix([[1],[1]]), math.matrix([[1],[1]])]);
+      v1.setComponents([3,4]);
+      v2.setComponents([3,3]);
+
+      var outerProduct = Util.Vector.outerProduct(v1,v2);
+      assert.equal(36, outerProduct.getComponent(0));
+      assert.equal(48, outerProduct.getComponent(1));
+      assert.equal(v1.getBasis(), outerProduct.getBasis());
     });
   });
   
