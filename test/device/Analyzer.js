@@ -1,9 +1,8 @@
 var assert = require('assert'),
-    //expect = require('expect'),
     math = require('mathjs')(),
     test = require('../bootstrap.js');
 
-describe('Analyzer.SternGerlach', function()
+describe('Device.Analyzer', function()
 {
   /**
    * @param {Number} num
@@ -31,13 +30,13 @@ describe('Analyzer.SternGerlach', function()
   };
   
   /**
-   * @returns {Analyzer.SternGerlach}
+   * @returns {Device.Analyzer}
    */
   var getAnalyzer = function(orient)
   {
     orient = orient || State.SPIN_HALF.X;
     var v = new Util.Vector(orient);
-    return new Analyzer.SternGerlach(v);
+    return new Device.Analyzer(v);
   };
   
   describe('analyze', function()
@@ -49,7 +48,7 @@ describe('Analyzer.SternGerlach', function()
       // State in Z
       var state = getState();
          
-      var results = getAnalyzer().analyze(state);
+      var results = getAnalyzer().evaluate(state);
       assert.equal(1000, results[0].getParticles().length);
     });
     
@@ -61,24 +60,24 @@ describe('Analyzer.SternGerlach', function()
       
       // Its possible for this to fail, since its base off of probabilities
       // but most of the time it should be around a 500 500 split
-      var results = getAnalyzer().analyze(state);
+      var results = getAnalyzer().evaluate(state);
       assert.equal(true, 
         test.withinRange(500, results[0].getParticles().length, 50));
       assert.equal(1000,
         results[0].getParticles().length + results[1].getParticles().length);
     });
 
-    it('should verify results from a first analyzer', function()
+    it('should verify results from a first device', function()
     {
       // State in up Z
       var state = getState();
       state.getVector().setComponent(1,0).normalize();
 
       // Generate a 50-50
-      var firstResult = getAnalyzer().analyze(state);
+      var firstResult = getAnalyzer().evaluate(state);
 
-      var upResult = getAnalyzer().analyze(firstResult[0]);
-      var downResult = getAnalyzer().analyze(firstResult[1]);
+      var upResult = getAnalyzer().evaluate(firstResult[0]);
+      var downResult = getAnalyzer().evaluate(firstResult[1]);
 
       assert.equal(1000, upResult[0].getParticles().length
         + downResult[1].getParticles().length);
@@ -95,14 +94,14 @@ describe('Analyzer.SternGerlach', function()
         });
       var comps = [1, math.sqrt(3), math.sqrt(6)];
 
-      var analyzer = new Analyzer.SternGerlach(new Util.Vector(basis));
+      var analyzer = new Device.Analyzer(new Util.Vector(basis));
       var state = new State(getParticle(10000), new Util.Vector(basis));
       state
         .getVector()
         .setComponents(comps)
         .normalize();
 
-      var results = analyzer.analyze(state), counts = [];
+      var results = analyzer.evaluate(state), counts = [];
 
       for (var i = 0; i < results.length; i++)
       {

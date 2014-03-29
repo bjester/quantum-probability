@@ -19,7 +19,7 @@ module.exports = function(grunt)
     'lib/Util.js',
     'lib/exception/Exception.js',
     'lib/particle/Particle.js',
-    'lib/analyzer/Analyzer.js',
+    'lib/device/Device.js',
 
     // Dependee's
     'lib/util/Logger.js',
@@ -29,8 +29,8 @@ module.exports = function(grunt)
     'lib/particle/Electron.js',
     'lib/particle/Neutron.js',
     'lib/particle/Proton.js',
-    'lib/analyzer/SternGerlach.js',
-    'lib/analyzer/MagneticField.js',
+    'lib/device/Analyzer.js',
+    'lib/device/MagneticField.js',
 
     // Core (final)
     'lib/Chain.js',
