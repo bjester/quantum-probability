@@ -25,7 +25,7 @@ describe('Device.Analyzer', function()
    */
   var getState = function(orient)
   {
-    orient = orient || State.SPIN_HALF.Z;
+    orient = orient || State.EIGEN_VECTORS.SPIN_HALF.Z;
     return new State(getParticle(1000), new Util.Vector(orient));
   };
   
@@ -34,7 +34,7 @@ describe('Device.Analyzer', function()
    */
   var getAnalyzer = function(orient)
   {
-    orient = orient || State.SPIN_HALF.X;
+    orient = orient || State.EIGEN_VECTORS.SPIN_HALF.X;
     var v = new Util.Vector(orient);
     return new Device.Analyzer(v);
   };
@@ -87,11 +87,7 @@ describe('Device.Analyzer', function()
     it('should result in the correct probabilities', function()
     {
       // State in up Z
-      var basis = [ [[1],[0],[0]], [[0],[1],[0]], [[0],[0],[1]]]
-        .map(function(val)
-        {
-          return math.matrix(val);
-        });
+      var basis = State.EIGEN_VECTORS.SPIN_ONE.Z;
       var comps = [1, math.sqrt(3), math.sqrt(6)];
 
       var analyzer = new Device.Analyzer(new Util.Vector(basis));
