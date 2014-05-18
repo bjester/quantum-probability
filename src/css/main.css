@@ -1,12 +1,84 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+body > header {
+  background: #555;
+  height: 50px;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  box-shadow: 0 -2px 12px #000;
+  -webkit-box-shadow: 0 -2px 12px #000;
+  -moz-box-shadow: 0 -2px 12px #000;
+  -o-box-shadow: 0 -2px 12px #000;
+  -ms-box-shadow: 0 -2px 12px #000;
+  z-index: 3;
+  color: #fff;
+  text-align: center;
+  line-height: 48px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+body > section {
+  position: fixed;
+  top: 50px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: #ccc;
+  z-index: 2;
+  transition: .35s all ease;
+  -webkit-transition: .35s all ease;
+  -moz-transition: .35s all ease;
+  -ms-transition: .35s all ease;
+  -o-transition: .35s all ease;
+}
+
+body > aside {
+  position: fixed;
+  top: 0;
+  left: -280px;
+  min-width: 280px;
+  bottom: 0;
+  background: blue;
+  z-index: 1;
+  transition: .35s all ease;
+  -webkit-transition: .35s all ease;
+  -moz-transition: .35s all ease;
+  -ms-transition: .35s all ease;
+  -o-transition: .35s all ease;
+}
+
+#MenuButton {
+  font-size: 30px;
+  position: absolute;
+  padding: 2px 0 0 5px;
+  cursor: pointer;
 }
 
 #Canvas {
-  background-color: #333;
-  bottom: 0;
-  position: absolute;
-  top: 0;
+  background: #333;
+  height: 100%;
   width: 100%;
+}
+
+@media (min-width: 1400px) {
+  body > aside {
+    width: 20%;
+    left: 0;
+  }
+  
+  body > section {
+    width: 80%;
+    left: 20%;
+  }
+  
+  #MenuButton {
+    display: none;
+  }
 }

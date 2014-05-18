@@ -3,3 +3,4 @@ deploy
 build/*.js
 *.log
 .idea/
+nbproject/

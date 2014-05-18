@@ -7,3 +7,12 @@
 [submodule "vendor/stats"]
 	path = vendor/stats
 	url = https://github.com/mrdoob/stats.js.git
+[submodule "vendor/ocanvas"]
+	path = vendor/ocanvas
+	url = git.bjester:koggdal/ocanvas.git
+[submodule "vendor/jquery"]
+	path = vendor/jquery
+	url = git.bjester:jquery/jquery
+[submodule "vendor/transition"]
+	path = vendor/transition
+	url = git.bjester:bjester/transition

@@ -35,7 +35,11 @@ module.exports = function(grunt)
     // Core (final)
     'lib/Chain.js',
     'lib/State.js',
-    'lib/System.js'
+    'lib/System.js',
+    
+    // UI
+    'lib/interface/device/Device.js',
+    'lib/interface/Interface.js'
   ];
   
   var depends = 
@@ -43,7 +47,10 @@ module.exports = function(grunt)
     'vendor/mathjs/dist/math.min.js',
     'vendor/mathjs/dist/math.map',
     'vendor/dat-gui/build/dat.gui.min.js',
-    'vendor/stats/build/stats.min.js'
+    'vendor/stats/build/stats.min.js',
+    'vendor/ocanvas/build/ocanvas-2.7.1.min.js',
+    'vendor/transition/build/transition.min.js',
+    'vendor/jquery/dist/jquery.min.js'
   ];
   
   var copyDepends = [];
@@ -99,6 +106,29 @@ module.exports = function(grunt)
     
     shell: 
     {
+      init: 
+      {
+        options: 
+        {
+          stdout: true
+        },
+        command: function()
+        {
+          return [
+            'git submodule init',
+            'git submodule update',
+            'echo "Need sudo commad to install with npm"',
+            'sudo npm install',
+            'cd vendor/mathjs',
+            'npm install',
+            'npm run build',
+            'cd ../ocanvas/build',
+            'node build.js',
+            'cd ../../../',
+          ].join(' && ');
+        }
+      },
+      
       buildDependencies: 
       {
         options: 
@@ -135,6 +165,14 @@ module.exports = function(grunt)
         files: 
         [
           {expand: true, cwd: 'src/', src: ['**'], dest: DEPLOY}
+        ]
+      },
+      font:
+      {
+        files: 
+        [
+          {src: 'vendor/fontello/css/fontello.css', dest: DEPLOY_CSS + '/fontello.css'},
+          {expand: true, cwd: 'vendor/fontello/', src: ['font/**'], dest: DEPLOY}
         ]
       }
     },
