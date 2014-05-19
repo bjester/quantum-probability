@@ -76,7 +76,11 @@ module.exports = function(grunt)
       {
         options: 
         {
-          banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+          banner: '/*! ' + [
+            '<%= pkg.name %> v<%= pkg.version %>',
+            '(c) 2014 Blaine Jester',
+            '<%= grunt.template.today("yyyy-mm-dd") %>'
+          ].join(' | ') + ' */\n'
           mangle: false,
           compress: false,
           beautify: true
@@ -89,7 +93,11 @@ module.exports = function(grunt)
       {
         options: 
         {
-          banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+          banner: '/*! ' + [
+            '<%= pkg.name %> v<%= pkg.version %>',
+            '(c) 2014 Blaine Jester',
+            '<%= grunt.template.today("yyyy-mm-dd") %>'
+          ].join(' | ') + ' */\n'
         },
         files:
         {
