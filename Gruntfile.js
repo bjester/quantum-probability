@@ -46,7 +46,6 @@ module.exports = function(grunt)
   [
     'vendor/mathjs/dist/math.min.js',
     'vendor/mathjs/dist/math.map',
-    'vendor/dat-gui/build/dat.gui.min.js',
     'vendor/stats/build/stats.min.js',
     'vendor/ocanvas/build/ocanvas-2.7.1.min.js',
     'vendor/transition/build/transition.min.js',
