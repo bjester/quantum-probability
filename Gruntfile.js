@@ -80,7 +80,7 @@ module.exports = function(grunt)
             '<%= pkg.name %> v<%= pkg.version %>',
             '(c) 2014 Blaine Jester',
             '<%= grunt.template.today("yyyy-mm-dd") %>'
-          ].join(' | ') + ' */\n'
+          ].join(' | ') + ' */\n',
           mangle: false,
           compress: false,
           beautify: true
