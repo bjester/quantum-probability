@@ -132,7 +132,9 @@ module.exports = function(grunt)
             'npm run build',
             'cd ../ocanvas/build',
             'node build.js',
-            'cd ../../../',
+            'cd ../jquery',
+            'npm install',
+            'npm run build',
           ].join(' && ');
         }
       },
