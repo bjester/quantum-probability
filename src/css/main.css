@@ -5,7 +5,13 @@ body {
 }
 
 body > header {
-  background: #555;
+  /*background: url('/images/stardust.png') repeat;*/
+  /*background-size: 399px 399px;*/
+  border-bottom:1px solid #e74c3c;
+  text-decoration:none; 
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+  background-color: #e67e22;
+ 
   height: 50px;
   left: 0;
   position: fixed;
@@ -37,6 +43,10 @@ body > section {
   -moz-transition: .35s all ease;
   -ms-transition: .35s all ease;
   -o-transition: .35s all ease;
+/*  background: url('/images/zw.jpg') repeat;
+  background-size: 531px 337px;*/
+  background: url('/images/stardust.png') repeat;
+  background-size: 399px 399px;
 }
 
 body > aside {
@@ -45,13 +55,15 @@ body > aside {
   left: -280px;
   min-width: 280px;
   bottom: 0;
-  background: blue;
+  /*background: url('/images/congruent_outline.png') repeat;*/
+  /*background-size: 46px 29px;*/
+  box-shadow: inset -2px 0 12px #000;
+  -webkit-box-shadow: inset -2px 0 12px #000;
+  -moz-box-shadow: inset -2px 0 12px #000;
+  -o-box-shadow: inset -2px 0 12px #000;
+  -ms-box-shadow: inset -2px 0 12px #000;
+  background: #444349;
   z-index: 1;
-  transition: .35s all ease;
-  -webkit-transition: .35s all ease;
-  -moz-transition: .35s all ease;
-  -ms-transition: .35s all ease;
-  -o-transition: .35s all ease;
 }
 
 #MenuButton {

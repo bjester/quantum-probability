@@ -24,8 +24,7 @@
     {
       translate.transition(
       {
-//        translate: [280, 0, 0]
-        opacity: 0.2
+        translate: [280, 0, 0]
       },
       function()
       {
@@ -38,8 +37,7 @@
     {
       translate.transition(
       {
-//        translate: [0, 0, 0]
-        opacity: 1
+        translate: [0, 0, 0]
       },
       function()
       {
