@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="15cm" height="12cm" viewBox="376 316 287 227" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="380" y="320" width="280" height="220"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" x="380" y="320" width="280" height="220"/>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" x1="600" y1="320" x2="600" y2="540"/>
+  <g>
+    <rect style="fill: #e67e22" x="380" y="320" width="220" height="220"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" x="380" y="320" width="220" height="220"/>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="490" cy="430" rx="90" ry="90"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" cx="490" cy="430" rx="90" ry="90"/>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" x1="600" y1="430" x2="660" y2="430"/>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" x1="630.024" y1="403.084" x2="630.024" y2="357.292"/>
+    <polygon style="fill: #000000" points="630.024,349.792 635.024,359.792 630.024,357.292 625.024,359.792 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" points="630.024,349.792 635.024,359.792 630.024,357.292 625.024,359.792 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" x1="630.024" y1="456.964" x2="630.024" y2="502.756"/>
+    <polygon style="fill: #000000" points="630.024,510.256 625.024,500.256 630.024,502.756 635.024,500.256 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" points="630.024,510.256 625.024,500.256 630.024,502.756 635.024,500.256 "/>
+  </g>
+  <text font-size="104.806" style="fill: #000000;text-anchor:start;font-family:Ubuntu;font-style:normal;font-weight:normal" x="457.6" y="467.9">
+    <tspan x="457.6" y="467.9">X</tspan>
+  </text>
+</svg>

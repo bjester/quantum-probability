@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="13cm" height="18cm" viewBox="450 256 260 347" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #b3895a" x="460" y="500" width="240" height="100"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" x="460" y="500" width="240" height="100"/>
+  </g>
+  <g>
+    <rect style="fill: #b3895a" x="460" y="260" width="240" height="100"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" x="460" y="260" width="240" height="100"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" x1="580" y1="500" x2="580" y2="373.416"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" points="585,376.708 580,366.708 575,376.708 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" x1="460" y1="500" x2="460" y2="373.416"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" points="465,376.708 460,366.708 455,376.708 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" x1="500" y1="500" x2="500" y2="374.406"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" points="505,377.698 500,367.698 495,377.698 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" x1="540" y1="500" x2="540" y2="374.406"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" points="545,377.698 540,367.698 535,377.698 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" x1="620" y1="500" x2="620" y2="374.406"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" points="625,377.698 620,367.698 615,377.698 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" x1="660" y1="500" x2="660" y2="374.406"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" points="665,377.698 660,367.698 655,377.698 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" x1="700" y1="500" x2="700" y2="373.416"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" points="705,376.708 700,366.708 695,376.708 "/>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="580" cy="550" rx="50" ry="50"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" cx="580" cy="550" rx="50" ry="50"/>
+  </g>
+  <text font-size="56.8283" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="561" y="572">
+    <tspan x="561" y="572">Z</tspan>
+  </text>
+</svg>

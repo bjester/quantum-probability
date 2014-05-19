@@ -99,7 +99,12 @@ body > section > canvas {
   text-shadow: 3px 3px 0 rgba(0,0,0,0.35);
 }
 
+body > aside > nav {
+  margin-bottom: 25px;
+}
+
 body > aside > nav ul {
+  border-top: 1px solid #777;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -127,6 +132,23 @@ body > aside > nav li:hover {
 
 body > aside > nav li > span {
   margin-right: 8px;
+}
+
+body > aside > nav li > img {
+  box-sizing: border-box;
+  height: 28px;
+  float: left;
+  margin-top: -5px;
+}
+
+body > aside > nav#Add li > span {
+  margin-left: 55px;
+  display: block;
+}
+
+body > aside h3 {
+  color: #fff;
+  margin: 10px 0 5px 5%;
 }
 
 @media (min-width: 1400px) {

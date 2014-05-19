@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="24cm" height="17cm" viewBox="196 176 467 327" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #d8e5e5" x="200" y="180" width="320" height="320"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" x="200" y="180" width="320" height="320"/>
+  </g>
+  <g>
+    <rect style="fill: #e74c3c" x="240" y="220" width="240" height="240"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" x="240" y="220" width="240" height="240"/>
+  </g>
+  <path style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #f39c12" d="M 349 270 C 269,270 329,410 249,410"/>
+  <path style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #f39c12" d="M 389 270 C 309,270 369,410 289,410"/>
+  <path style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #f39c12" d="M 429 270 C 349,270 409,410 329,410"/>
+  <path style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #f39c12" d="M 469 270 C 389,270 449,410 369,410"/>
+  <g>
+    <rect style="fill: #d8e5e5" x="520" y="300" width="140" height="80"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 6; stroke: #000000" x="520" y="300" width="140" height="80"/>
+  </g>
+  <path style="fill: none; fill-opacity:0; stroke-width: 4; stroke: #000000" d="M 620,360 A 32.0714,32.0714 0 0 0 620,320"/>
+  <path style="fill: none; fill-opacity:0; stroke-width: 4; stroke: #000000" d="M 600,360 A 32.0714,32.0714 0 0 0 600,320"/>
+  <path style="fill: none; fill-opacity:0; stroke-width: 4; stroke: #000000" d="M 580,360 A 32.0714,32.0714 0 0 0 580,320"/>
+  <path style="fill: none; fill-opacity:0; stroke-width: 4; stroke: #000000" d="M 560,360 A 32.0714,32.0714 0 0 0 560,320"/>
+</svg>
