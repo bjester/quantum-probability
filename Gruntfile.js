@@ -312,6 +312,7 @@ module.exports = function(grunt)
   grunt.registerTask('default', 
     ['bootstrapGenerate', 'uglify:build', 'uglify:minify', 'clean:bootstrap']);
   grunt.registerTask('build', ['shell:buildDependencies']);
+  grunt.registerTask('init', ['shell:init']);
   grunt.registerTask('test', 
     ['bootstrapGenerate', 'uglify:build', 'mochaTest', 'clean:bootstrap']);
   grunt.registerTask('undeploy', ['clean']);
