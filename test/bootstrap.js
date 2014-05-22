@@ -3,6 +3,7 @@ var mathjs = require('mathjs'),
 
 // Export mathjs, since its dependency
 global.mathjs = mathjs;
+global.jQuery = null;
 require('../build/quantum-probability.js');
 
 module.exports = 
