@@ -41,8 +41,8 @@
         {type: 'standard', icon: 'reply', title: 'Go Back', action: 'menu/main'},
         {type: 'device', src: '/images/system/oven.svg', title: 'Oven', action: 'add/oven'},
         {type: 'device', src: '/images/system/sg2z.svg', title: 'Analyzer', action: 'add/analyzer'},
-        {type: 'device', src: '/images/system/magneticFieldz.svg', title: 'MagneticField', action: 'magneticField'},
-        {type: 'device', src: '/images/system/detector.svg', title: 'Detector', action: 'detector'}
+        {type: 'device', src: '/images/system/magneticFieldz.svg', title: 'MagneticField', action: 'add/magneticField'},
+        {type: 'device', src: '/images/system/detector.svg', title: 'Detector', action: 'add/detector'}
       ]
     });
     
