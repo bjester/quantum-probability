@@ -38,17 +38,19 @@ module.exports = function(grunt)
     'lib/System.js',
     
     // UI
-    'lib/interface/device/Device.js',
-    'lib/interface/Interface.js'
+    'lib/ui/Template.js',
+    'lib/ui/device/Device.js',
+    'lib/ui/UserInterface.js'
   ];
-  
+
+  var target = (grunt.option('target') === 'dev') ? '' : '.min';
   var depends = 
   [
     'vendor/mathjs/dist/math.min.js',
     'vendor/mathjs/dist/math.map',
     'vendor/stats/build/stats.min.js',
     'vendor/ocanvas/build/ocanvas-2.7.1.min.js',
-    'vendor/transition/build/transition.min.js',
+    'vendor/transition/build/transition'+target+'.js',
     'vendor/jquery/dist/jquery.min.js'
   ];
   
@@ -257,7 +259,7 @@ module.exports = function(grunt)
       for (var j = 0; j < paths.length; j++)
       {
         var key = ucfirst(path.basename(paths[j], '.js'));
-        
+
         current[key] = {};
         current = current[key];
       }

@@ -69,6 +69,7 @@ body footer {
 
 #MenuButton {
   cursor: pointer;
+  display: block;
   font-size: 25px;
   padding: 1px 0 0 5px;
   position: absolute;
@@ -112,13 +113,11 @@ body > aside > nav ul {
 
 body > aside > nav li {
   border-bottom: 1px solid #777;
-  box-sizing: border-box;
   color: #fff;
   cursor: pointer;
   font-weight: bold;
   list-style: none;
   margin: 0;
-  padding: 11px 5%;
 }
 
 body > aside > nav li:hover {
@@ -130,20 +129,34 @@ body > aside > nav li:hover {
   -ms-box-shadow: inset 0 -2px 5px #000;
 }
 
-body > aside > nav li > span {
+body > aside > nav li > a {
+  box-sizing: border-box;
+  color: #fff;
+  display: block;
+  padding: 11px 5%;
+  text-decoration: none;
+}
+
+body > aside > nav li > a > span.Icon {
   margin-right: 8px;
 }
 
-body > aside > nav li > img {
+body > aside > nav li img {
   box-sizing: border-box;
   height: 28px;
   float: left;
   margin-top: -5px;
 }
 
-body > aside > nav#Add li > span {
+body > aside > nav#Add li > a > span {
   margin-left: 55px;
   display: block;
+}
+
+body > aside > nav#Add li > a > span.Icon {
+  margin-left: 0;
+  display: inline-block;
+  float: left;
 }
 
 body > aside h3 {
