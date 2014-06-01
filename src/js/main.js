@@ -66,14 +66,14 @@
 
     var content = $('body > section');
 
-    var pos = (content.width() < 1280)
-      ? 1280 / 6
-      : (content.width()) / 6;
+    var pos = (content.width() < 600)
+      ? 600 / 5
+      : (content.width()) / 5;
 
     var height = 70;
 
     var oven = ui.canvas.display.image({
-      x: pos,
+      x: pos-(pos/2),
       y: 120,
       origin: { x: "center", y: "center" },
       image: "/images/system/oven.svg",
@@ -83,8 +83,8 @@
     });
 
     var line1 = ui.canvas.display.line({
-      start: { x: pos+(height/2), y: 120 },
-      end: { x: 2*pos, y: 120 },
+      start: { x: pos-(pos/2)+(height/2), y: 120 },
+      end: { x: (2*pos)-(pos/2), y: 120 },
       stroke: "5px #ddd",
       zIndex:1
     });
@@ -92,7 +92,7 @@
     ui.canvas.addChild(line1);
 
     var analyzer = ui.canvas.display.image({
-      x: (2*pos),
+      x: (2*pos)-(pos/2),
       y: 120,
       origin: { x: "center", y: "center" },
       image: "/images/system/sg2z.svg",
@@ -102,8 +102,8 @@
     });
 
     var line2 = ui.canvas.display.line({
-      start: { x: (2*pos)+(height/2), y: 120-(height/3) },
-      end: { x: (3*pos)-(height/2), y: 120 },
+      start: { x: (2*pos)-(pos/2)+(height/2), y: 120-(height/3) },
+      end: { x: (3*pos)-(pos/2)-(height/2), y: 120 },
       stroke: "5px #ddd",
       zIndex:1
     });
@@ -111,7 +111,7 @@
     ui.canvas.addChild(line2);
 
     var analyzer2 = ui.canvas.display.image({
-      x: (3*pos),
+      x: (3*pos)-(pos/2),
       y: 120,
       origin: { x: "center", y: "center" },
       image: "/images/system/sg2x.svg",
@@ -121,8 +121,8 @@
     });
 
     var line3 = ui.canvas.display.line({
-      start: { x: (3*pos)+(height/2), y: 120-(height/3) },
-      end: { x: (4*pos)-(height/2), y: 120 },
+      start: { x: (3*pos)-(pos/2)+(height/2), y: 120-(height/3) },
+      end: { x: (4*pos)-(pos/2)-(height/2), y: 120 },
       stroke: "5px #ddd",
       zIndex:1
     });
@@ -130,7 +130,7 @@
     ui.canvas.addChild(line3);
 
     var analyzer3 = ui.canvas.display.image({
-      x: (4*pos),
+      x: (4*pos)-(pos/2),
       y: 120,
       origin: { x: "center", y: "center" },
       image: "/images/system/sg2z.svg",
@@ -140,8 +140,8 @@
     });
 
     var line4 = ui.canvas.display.line({
-      start: { x: (4*pos)+(height/2), y: 120-(height/3) },
-      end: { x: (5*pos)-(height/2), y: 80 },
+      start: { x: (4*pos)-(pos/2)+(height/2), y: 120-(height/3) },
+      end: { x: (5*pos)-(pos/2)-(height/2), y: 80 },
       stroke: "5px #ddd",
       zIndex:1
     });
@@ -149,8 +149,8 @@
     ui.canvas.addChild(line4);
 
     var line5 = ui.canvas.display.line({
-      start: { x: (4*pos)+(height/2), y: 120+(height/3) },
-      end: { x: (5*pos)-(height/2), y: 160 },
+      start: { x: (4*pos)-(pos/2)+(height/2), y: 120+(height/3) },
+      end: { x: (5*pos)-(pos/2)-(height/2), y: 160 },
       stroke: "5px #ddd",
       zIndex:1
     });
@@ -158,7 +158,7 @@
     ui.canvas.addChild(line5);
 
     var detector1 = ui.canvas.display.image({
-      x: (5*pos),
+      x: (5*pos)-(pos/2),
       y: 160,
       origin: { x: "center", y: "center" },
       image: "/images/system/detector.svg",
@@ -168,7 +168,7 @@
     });
 
     var detector2 = ui.canvas.display.image({
-      x: (5*pos),
+      x: (5*pos)-(pos/2),
       y: 80,
       origin: { x: "center", y: "center" },
       image: "/images/system/detector.svg",
@@ -199,7 +199,7 @@
 
     var dUp = ui.canvas.display.text(
     {
-      x: (5*pos)+20,
+      x: (5*pos)-(pos/2)+20,
       y: 80,
       origin: { x: "center", y: "center" },
       font: "bold 30px sans-serif",
@@ -209,7 +209,7 @@
 
     var dDown = ui.canvas.display.text(
     {
-      x: (5*pos)+20,
+      x: (5*pos)-(pos/2)+20,
       y: 160,
       origin: { x: "center", y: "center" },
       font: "bold 30px sans-serif",
@@ -256,7 +256,7 @@
     };
 
     var a1 = getAnalyzer(State.EIGEN_VECTORS.SPIN_HALF.Z);
-    var a2 = getAnalyzer(State.EIGEN_VECTORS.SPIN_HALF.X);
+    var a2 = getAnalyzer(State.EIGEN_VECTORS.SPIN_HALF.Z);
     var a3 = getAnalyzer(State.EIGEN_VECTORS.SPIN_HALF.Z);
 
     ui.canvas.setLoop(function()
@@ -282,8 +282,6 @@
       $("#play").show();
       ui.canvas.timeline.stop();
     });
-
-    console.log(dUp);
   };
   
   $(function()
