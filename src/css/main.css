@@ -75,11 +75,6 @@ body footer {
   position: absolute;
 }
 
-body > section > canvas {
-  height: 100%;
-  width: 100%;
-}
-
 #Controls {
   color: #fff;
   float: right;
