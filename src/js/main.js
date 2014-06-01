@@ -11,6 +11,34 @@
   
   main.init = function()
   {
+    var hash = global.location.hash.slice(1);
+    var params = {};
+
+    if (hash)
+    {
+      params = $.unserialize(hash);
+    }
+
+    if (!('state' in params))
+    {
+      params.state = ['z',1,1];
+    }
+    else
+    {
+      params.state = params.state.split(',');
+      params.state[1] = parseInt(params.state[1]);
+      params.state[2] = parseInt(params.state[2]);
+    }
+
+    if (!('analyzer' in params))
+    {
+      params.analyzer = ['z','x','z'];
+    }
+    else
+    {
+      params.analyzer = params.analyzer.split(',');
+    }
+
     global.ui = ui = new global.UI.UserInterface(
     { 
       header: 'body > header',
@@ -91,11 +119,16 @@
 
     ui.canvas.addChild(line1);
 
+    var getAnalyzerImage = function(i)
+    {
+      return "/images/system/sg2" + params.analyzer[i] + ".svg";
+    };
+
     var analyzer = ui.canvas.display.image({
       x: (2*pos)-(pos/2),
       y: 120,
       origin: { x: "center", y: "center" },
-      image: "/images/system/sg2z.svg",
+      image: getAnalyzerImage(0),
       height: height,
       width: height*1.24941,
       zIndex: 10
@@ -114,7 +147,7 @@
       x: (3*pos)-(pos/2),
       y: 120,
       origin: { x: "center", y: "center" },
-      image: "/images/system/sg2x.svg",
+      image: getAnalyzerImage(1),
       height: height,
       width: height*1.24941,
       zIndex: 10
@@ -133,7 +166,7 @@
       x: (4*pos)-(pos/2),
       y: 120,
       origin: { x: "center", y: "center" },
-      image: "/images/system/sg2z.svg",
+      image: getAnalyzerImage(2),
       height: height,
       width: height*1.24941,
       zIndex: 10
@@ -196,13 +229,32 @@
     }).trigger('resize');
 
 
+    var down1 = ui.canvas.display.text(
+    {
+      x: (2*pos)-(pos/2)+60,
+      y: 130,
+      origin: { x: "left", y: "top" },
+      font: "bold 25px sans-serif",
+      text: "0",
+      fill: "#fff"
+    });
+
+    var down2 = ui.canvas.display.text(
+    {
+      x: (3*pos)-(pos/2)+60,
+      y: 130,
+      origin: { x: "left", y: "top" },
+      font: "bold 25px sans-serif",
+      text: "0",
+      fill: "#fff"
+    });
 
     var dUp = ui.canvas.display.text(
     {
       x: (5*pos)-(pos/2)+20,
       y: 80,
       origin: { x: "center", y: "center" },
-      font: "bold 30px sans-serif",
+      font: "bold 25px sans-serif",
       text: "0",
       fill: "#000"
     });
@@ -212,11 +264,13 @@
       x: (5*pos)-(pos/2)+20,
       y: 160,
       origin: { x: "center", y: "center" },
-      font: "bold 30px sans-serif",
+      font: "bold 25px sans-serif",
       text: "0",
       fill: "#000"
     });
 
+    ui.canvas.addChild(down1);
+    ui.canvas.addChild(down2);
     ui.canvas.addChild(dUp);
     ui.canvas.addChild(dDown);
 
@@ -239,9 +293,9 @@
     /**
      * @returns {State}
      */
-    var getState = function(num, orient)
+    var getState = function(num)
     {
-      orient = orient || State.EIGEN_VECTORS.SPIN_HALF.Z;
+      orient = State.EIGEN_VECTORS.SPIN_HALF[params.state[0].toUpperCase()];
       return new State(getParticle(num), new Util.Vector(orient));
     };
 
@@ -255,18 +309,28 @@
       return new Device.Analyzer(v);
     };
 
-    var a1 = getAnalyzer(State.EIGEN_VECTORS.SPIN_HALF.Z);
-    var a2 = getAnalyzer(State.EIGEN_VECTORS.SPIN_HALF.Z);
-    var a3 = getAnalyzer(State.EIGEN_VECTORS.SPIN_HALF.Z);
+    var a1 = getAnalyzer(State.EIGEN_VECTORS.SPIN_HALF[params.analyzer[0].toUpperCase()]);
+    var a2 = getAnalyzer(State.EIGEN_VECTORS.SPIN_HALF[params.analyzer[1].toUpperCase()]);
+    var a3 = getAnalyzer(State.EIGEN_VECTORS.SPIN_HALF[params.analyzer[2].toUpperCase()]);
+
+    var updateText = function(obj, result)
+    {
+      obj.text = '' + (parseInt(obj.text) + result.getParticles().length);
+    };
 
     ui.canvas.setLoop(function()
     {
       var state = getState(50);
-      var results = a3.evaluate(a2.evaluate(a1.evaluate(state)[0])[0]);
+      state.getVector().setComponents(params.state.slice(1)).normalize();
 
-//      console.log(dUp.text, parseInt(dUp.text), results[0].length)
-      dUp.text = '' + (parseInt(dUp.text) + results[0].getParticles().length);
-      dDown.text = '' + (parseInt(dDown.text) + results[1].getParticles().length);
+      var output1 = a1.evaluate(state);
+      var output2 = a2.evaluate(output1[0]);
+      var output3 = a3.evaluate(output2[0]);
+
+      updateText(down1, output1[1]);
+      updateText(down2, output2[1]);
+      updateText(dUp, output3[0]);
+      updateText(dDown, output3[1]);
     });
 
     $('#play').on("click", function()
@@ -286,14 +350,50 @@
   
   $(function()
   {
-    global.location.href = '#';
-
     // Load micro templates
     $.get('templates.html', function(data)
     {
       $('body').append(data);
       main.init();
+      global.location.href = '#';
     });
   });
   
+})(jQuery);
+
+/**
+ * $.unserialize
+ *
+ * Takes a string in format "param1=value1&param2=value2" and returns an object { param1: 'value1', param2: 'value2' }. If the "param1" ends with "[]" the param is treated as an array.
+ *
+ * Example:
+ *
+ * Input:  param1=value1&param2=value2
+ * Return: { param1 : value1, param2: value2 }
+ *
+ * Input:  param1[]=value1&param1[]=value2
+ * Return: { param1: [ value1, value2 ] }
+ *
+ * @todo Support params like "param1[name]=value1" (should return { param1: { name: value1 } })
+ * Usage example: console.log($.unserialize("one="+escape("& = ?")+"&two="+escape("value1")+"&two="+escape("value2")+"&three[]="+escape("value1")+"&three[]="+escape("value2")));
+ */
+(function($){
+  $.unserialize = function(serializedString){
+    var str = decodeURI(serializedString);
+    var pairs = str.split('&');
+    var obj = {}, p, idx;
+    for (var i=0, n=pairs.length; i < n; i++) {
+      p = pairs[i].split('=');
+      idx = p[0];
+      if (obj[idx] === undefined) {
+        obj[idx] = unescape(p[1]);
+      }else{
+        if (typeof obj[idx] == "string") {
+          obj[idx]=[obj[idx]];
+        }
+        obj[idx].push(unescape(p[1]));
+      }
+    }
+    return obj;q
+  };
 })(jQuery);
