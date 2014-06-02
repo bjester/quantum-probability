@@ -56,7 +56,8 @@
         {type: 'standard', icon: 'info', title: 'About', action: 'page/about'},
         {type: 'standard', icon: 'plus', title: 'Add Device', action: 'menu/add'},
         {type: 'standard', icon: 'cog', title: 'Settings', action: 'page/settings'},
-        {type: 'standard', icon: 'help', title: 'Help', action: 'page/help'}
+        {type: 'standard', icon: 'help', title: 'Help', action: 'page/help'},
+        {type: 'standard', icon: 'attention', title: 'Tests', action: 'page/tests'}
       ]
     });
 
@@ -74,9 +75,6 @@
       ]
     });
     
-//    var menuButton = $('#MenuButton'),
-//        translate = $('.Translate');
-    
     
     $('#MenuButton').on('click', function()
     {
@@ -91,6 +89,10 @@
     });
 
     ui.fillMenu('main');
+    ui.addRoute('page/tests', function()
+    {
+      global.location.href = '/tests.html';
+    });
 
     var content = $('body > section');
 
