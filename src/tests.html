@@ -26,6 +26,7 @@
                                                          ▀▄▄▄▄▄▄▀▀▀▒▒▒▒▒▄▄▀     
                                                           ░▒▒▒▒▒▒▒▒▒▒▀▀        
     -->
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
   </head>
   <body>
     <h1>Presentation Tests</h1>
@@ -33,11 +34,88 @@
       a {
           display: block;
       }
+      label {
+        display: block;
+      }
     </style>
-    <a href="/#analyzer=z,z,z" target="_blank">#analyzer=z,z,z</a>
-    <a href="/#analyzer=z,x,z" target="_blank">#analyzer=z,x,z</a>
-    <a href="/#analyzer=z,y,z" target="_blank">#analyzer=z,y,z</a>
-    <a href="/#analyzer=z,z,z&state=z,0,1" target="_blank">#analyzer=z,z,z&state=z,0,1</a>
-    <a href="/#analyzer=x,y,z&state=z,2,1" target="_blank">#analyzer=x,y,z&state=z,2,1</a>
+    <a href="/?analyzer=z,z,z" target="_blank">?analyzer=z,z,z</a>
+    <a href="/?analyzer=z,x,z" target="_blank">?analyzer=z,x,z</a>
+    <a href="/?analyzer=z,y,z" target="_blank">?analyzer=z,y,z</a>
+    <a href="/?analyzer=z,z,z&state=z,0,1" target="_blank">?analyzer=z,z,z&state=z,0,1</a>
+    <a href="/?analyzer=x,y,z&state=z,2,1" target="_blank">?analyzer=x,y,z&state=z,2,1</a>
+    <form action="/">
+      <h3>Initial State</h3>
+      <label>
+        State:
+        <select id="state" name="state">
+          <option value="z">z</option>
+          <option value="x">x</option>
+          <option value="y">y</option>
+        </select>
+      </label>
+      <label>
+        Up Component: <input id="state_up" name="state_up" type="text" value="1">
+      </label>
+      <label>
+        Down Component: <input id="state_down" name="state_down" type="text" value="1">
+      </label>
+      <h3>Analyzers</h3>
+      <label>
+        Analyzer 1:
+        <select id="analyzer1" name="analyzer1">
+          <option value="z">z</option>
+          <option value="x">x</option>
+          <option value="y">y</option>
+        </select>
+      </label>
+      <label>
+        Analyzer 2:
+        <select id="analyzer2" name="analyzer2">
+          <option value="z">z</option>
+          <option value="x">x</option>
+          <option value="y">y</option>
+        </select>
+      </label>
+      <label>
+        Analyzer 1:
+        <select id="analyzer3" name="analyzer3">
+          <option value="z">z</option>
+          <option value="x">x</option>
+          <option value="y">y</option>
+        </select>
+      </label>
+      <input type="submit" value="Go" />
+    </form>
+    <script type="text/javascript">
+      $(function()
+      {
+        $('form').submit(function()
+        {
+          var param = {analyzer: [], state: []};
+
+          param.analyzer.push(
+            $('#analyzer1').val(),
+            $('#analyzer2').val(),
+            $('#analyzer3').val()
+          );
+
+          param.state.push(
+            $('#state').val(),
+            $('#state_up').val(),
+            $('#state_down').val()
+          );
+
+          for (var k in param)
+          {
+            param[k] = param[k].join(',');
+          }
+
+          url = '/?' + decodeURIComponent($.param(param));
+          window.open(url, '_blank');
+
+          return false;
+        });
+      });
+    </script>
   </body>
 </html>

@@ -11,12 +11,12 @@
   
   main.init = function()
   {
-    var hash = global.location.hash.slice(1);
+    var query = global.location.href.replace(/[^?]+\?([^#]+).*/, '$1');
     var params = {};
 
-    if (hash)
+    if (query)
     {
-      params = $.unserialize(hash);
+      params = $.unserialize(query);
     }
 
     if (!('state' in params))
@@ -318,10 +318,12 @@
       obj.text = '' + (parseInt(obj.text) + result.getParticles().length);
     };
 
+    var state = getState(1);
+    state.getVector().setComponents(params.state.slice(1)).normalize();
+
     ui.canvas.setLoop(function()
     {
-      var state = getState(50);
-      state.getVector().setComponents(params.state.slice(1)).normalize();
+      state.setParticles(getParticle(50));
 
       var output1 = a1.evaluate(state);
       var output2 = a2.evaluate(output1[0]);
