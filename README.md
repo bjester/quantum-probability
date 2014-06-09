@@ -5,6 +5,8 @@ Quantum Probability
 A physics simulation of the Stern-Gerlach experiment including time dependent 
 effects on spin probability.
 
+Link to development site: http://physics.blainejester.com
+
 For educational use.
 
 Developed by Blaine Jester, under supervision of Dr. Charles De Leone  
