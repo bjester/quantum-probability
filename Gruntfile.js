@@ -36,7 +36,7 @@ module.exports = function(grunt)
     'lib/Chain.js',
     'lib/State.js',
     'lib/System.js',
-    
+
     // UI
     'lib/ui/Template.js',
     'lib/ui/device/Device.js',
