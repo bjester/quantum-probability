@@ -1,8 +1,8 @@
 // Gruntfile
 var fs = require('fs'),
     path = require('path');
-    
-require('./lib/Util.js');
+
+require('./lib/util');
 var Util = global.Util;
 
 var DEPLOY = 'deploy';
@@ -11,40 +11,40 @@ var DEPLOY_CSS = DEPLOY + '/css';
 
 module.exports = function(grunt)
 {
-  var src = 
+  var src =
   [
     // Base
     'lib/bootstrap.js',
-    'lib/Constants.js',
-    'lib/Util.js',
+    'lib/index.js',
+    'lib/index.js',
     'lib/exception/Exception.js',
-    'lib/particle/Particle.js',
-    'lib/device/Device.js',
+    'lib/particle/index.js',
+    'lib/device/device.js',
 
     // Dependee's
     'lib/util/Logger.js',
-    'lib/util/Vector.js',
+    'lib/util/vector.js',
     'lib/exception/InvalidPreparation.js',
     'lib/exception/InvalidProperty.js',
-    'lib/particle/Electron.js',
-    'lib/particle/Neutron.js',
-    'lib/particle/Proton.js',
-    'lib/device/Analyzer.js',
-    'lib/device/MagneticField.js',
+    'lib/particle/electron.js',
+    'lib/particle/neutron.js',
+    'lib/particle/proton.js',
+    'lib/device/analyzer.js',
+    'lib/device/magneticField.js',
 
     // Core (final)
-    'lib/Chain.js',
-    'lib/State.js',
-    'lib/System.js',
+    'lib/chain.js',
+    'lib/state.js',
+    'lib/system.js',
 
     // UI
     'lib/ui/Template.js',
-    'lib/ui/device/Device.js',
+    'lib/ui/device/device.js',
     'lib/ui/UserInterface.js'
   ];
 
   var target = (grunt.option('target') === 'dev') ? '' : '.min';
-  var depends = 
+  var depends =
   [
     'vendor/mathjs/dist/math.min.js',
     'vendor/mathjs/dist/math.map',
@@ -53,9 +53,9 @@ module.exports = function(grunt)
     'vendor/transition/build/transition'+target+'.js',
     'vendor/jquery/dist/jquery.min.js'
   ];
-  
+
   var copyDepends = [];
-  
+
   for (var i = 0; i < depends.length; i++)
   {
     copyDepends.push(
@@ -66,16 +66,16 @@ module.exports = function(grunt)
       dest: DEPLOY_JS
     });
   }
-  
+
   // Project configuration.
   grunt.initConfig(
   {
     pkg: grunt.file.readJSON('package.json'),
-    uglify: 
+    uglify:
     {
-      build: 
+      build:
       {
-        options: 
+        options:
         {
           banner: '/*! ' + [
             '<%= pkg.name %> v<%= pkg.version %>',
@@ -89,10 +89,10 @@ module.exports = function(grunt)
         src: src,
         dest: 'build/<%= pkg.name %>.js'
       },
-      
+
       minify:
       {
-        options: 
+        options:
         {
           banner: '/*! ' + [
             '<%= pkg.name %> v<%= pkg.version %>',
@@ -106,18 +106,18 @@ module.exports = function(grunt)
         }
       }
     },
-    
-    clean: 
+
+    clean:
     {
       deploy: [ DEPLOY ],
       bootstrap: ['lib/bootstrap.js']
     },
-    
-    shell: 
+
+    shell:
     {
-      init: 
+      init:
       {
-        options: 
+        options:
         {
           stdout: true
         },
@@ -139,10 +139,10 @@ module.exports = function(grunt)
           ].join(' && ');
         }
       },
-      
-      buildDependencies: 
+
+      buildDependencies:
       {
-        options: 
+        options:
         {
           stdout: true
         },
@@ -152,17 +152,17 @@ module.exports = function(grunt)
         }
       }
     },
-    
+
     copy:
     {
       build:
       {
-        files: 
+        files:
         [
           {
-            expand: true, 
-            cwd: 'build/', 
-            src: ['**'], 
+            expand: true,
+            cwd: 'build/',
+            src: ['**'],
             dest: DEPLOY_JS
           }
         ]
@@ -173,27 +173,27 @@ module.exports = function(grunt)
       },
       src:
       {
-        files: 
+        files:
         [
           {expand: true, cwd: 'src/', src: ['**'], dest: DEPLOY}
         ]
       },
       font:
       {
-        files: 
+        files:
         [
           {src: 'vendor/fontello/css/fontello.css', dest: DEPLOY_CSS + '/fontello.css'},
           {expand: true, cwd: 'vendor/fontello/', src: ['font/**'], dest: DEPLOY}
         ]
       }
     },
-    
+
     // Testing
-    mochaTest: 
+    mochaTest:
     {
-      test: 
+      test:
       {
-        options: 
+        options:
         {
           reporter: 'spec'
         },
@@ -201,7 +201,7 @@ module.exports = function(grunt)
       }
     }
   });
-  
+
   /**
    * @param {String} file
    * @return {String}
@@ -214,7 +214,7 @@ module.exports = function(grunt)
       '"></script>'
     ].join('');
   }
-  
+
   /**
    * @param {String} file
    * @return {String}
@@ -227,7 +227,7 @@ module.exports = function(grunt)
       '" />'
     ].join('');
   }
-  
+
   /**
    * @param {String} str
    * @return {String}
@@ -238,7 +238,7 @@ module.exports = function(grunt)
     var f = str.charAt(0).toUpperCase();
     return f + str.substr(1);
   }
-  
+
   /**
    * Generates bootstrap JSON
    */
@@ -249,13 +249,13 @@ module.exports = function(grunt)
         {
           return p.split('/').slice(1);
         });
-        
+
     for (var i = 0; i < bootstrapSrc.length; i++)
     {
       var paths = bootstrapSrc[i],
           merge = {},
           current = merge;
-      
+
       for (var j = 0; j < paths.length; j++)
       {
         var key = ucfirst(path.basename(paths[j], '.js'));
@@ -263,23 +263,23 @@ module.exports = function(grunt)
         current[key] = {};
         current = current[key];
       }
-      
+
       Util.extend(output, merge, false, true);
     }
-    
+
     var bootstrap = fs.readFileSync('bootstrap.js.tmpl', {encoding: 'utf8'});
     bootstrap = bootstrap.replace('%spaces%', JSON.stringify(output));
     fs.writeFileSync('lib/bootstrap.js', bootstrap);
   });
-  
+
   /**
-   * Injects resources into 
+   * Injects resources into
    */
   grunt.registerTask('resourceInject', function()
   {
     var dependsBase = depends.map(path.basename),
         t = '\n  ';
-    
+
     var scripts = fs.readdirSync(DEPLOY_JS)
       .filter(function(file)
       {
@@ -291,17 +291,17 @@ module.exports = function(grunt)
         return path.extname(file) === '.js';
       })
       .map(getScript).reverse();
-    
+
     var stylesheets = fs.readdirSync(DEPLOY_CSS).map(getLink);
     var index = DEPLOY + '/index.html';
     var data = fs.readFileSync(index, {encoding: 'utf8'});
-    
+
     data = data.replace('</head>', t + '  ' + stylesheets.join(t + '  ') + t + '</head>')
                .replace('</body>', t + '  ' + scripts.join(t + '  ') + t + '</body>');
 
     fs.writeFileSync(index, data);
   });
-  
+
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -310,21 +310,21 @@ module.exports = function(grunt)
   grunt.loadNpmTasks('grunt-shell');
 
   // Default task(s).
-  grunt.registerTask('default', 
+  grunt.registerTask('default',
     ['bootstrapGenerate', 'uglify:build', 'uglify:minify', 'clean:bootstrap']);
   grunt.registerTask('build', ['shell:buildDependencies']);
   grunt.registerTask('init', ['shell:init']);
-  grunt.registerTask('test', 
+  grunt.registerTask('test',
     ['bootstrapGenerate', 'uglify:build', 'mochaTest', 'clean:bootstrap']);
   grunt.registerTask('undeploy', ['clean']);
   grunt.registerTask('bootstrap', ['bootstrapGenerate']);
-  grunt.registerTask('deploy', 
+  grunt.registerTask('deploy',
   [
-    'clean', 
-    //'shell:buildDependencies', 
+    'clean',
+    //'shell:buildDependencies',
     'bootstrapGenerate',
-    'uglify:build', 
-    'uglify:minify', 
+    'uglify:build',
+    'uglify:minify',
     'copy',
     'resourceInject',
     'clean:bootstrap'

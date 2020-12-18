@@ -23,8 +23,8 @@
     "physics"
   ],
   "dependencies": {
-    "mathjs": "0.18.1",
     "dat-gui": "0.5",
+    "mathjs": "^8.1.0",
     "stats": "1.0.0"
   },
   "devDependencies": {
